@@ -1,4 +1,4 @@
-heroku create myapp --buildpack heroku/python
+git push heroku master
 import telebot
 import random
 import requests
