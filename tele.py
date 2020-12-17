@@ -157,7 +157,7 @@ def inline(call):
 			bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
 	if call.data == 'USD':
 		bot.answer_callback_query(callback_query_id=call.id, text='Получаем информацию... Пожалуйста, подождите.')
-		HRN_USD = 'https://www.google.com/search?client=opera-gx&q=курс+доллара&sourceid=opera&ie=UTF-8&oe=UTF-8'
+		HRN_USD = 'https://www.google.com/search?client=opera-gx&hs=1FP&sxsrf=ALeKk02C7ieRyluwCjV5f9c4N1ZwuhZZpQ%3A1608241382442&ei=5tDbX-GxGsuIrwTT-7HYBA&q=доллар&oq=доллар&gs_lcp=CgZwc3ktYWIQAzIECCMQJzIICAAQyQMQywEyBQgAEMsBMgUIABDLATIFCAAQywEyBQgAEMsBMgUIABDLATIFCAAQywEyBQgAEMsBMgUIABDLAToECAAQR1CN9gNYjfYDYOn8A2gAcAJ4AIABgQGIAYEBkgEDMC4xmAEAoAEBqgEHZ3dzLXdpesgBCMABAQ&sclient=psy-ab&ved=0ahUKEwjhvMCC_tXtAhVLxIsKHdN9DEsQ4dUDCAw&uact=5'
 		headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36 OPR/71.0.3770.456'}
 		full_page = requests.get(HRN_USD, headers=headers)
 		soup = BeautifulSoup(full_page.content, 'html.parser')
