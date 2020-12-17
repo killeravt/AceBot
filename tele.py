@@ -157,7 +157,7 @@ def inline(call):
 			bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
 	if call.data == 'USD':
 		bot.answer_callback_query(callback_query_id=call.id, text='Получаем информацию... Пожалуйста, подождите.')
-		HRN_USD = 'https://www.google.com/search?client=opera-gx&hs=1FP&sxsrf=ALeKk02C7ieRyluwCjV5f9c4N1ZwuhZZpQ%3A1608241382442&ei=5tDbX-GxGsuIrwTT-7HYBA&q=доллар&oq=доллар&gs_lcp=CgZwc3ktYWIQAzIECCMQJzIICAAQyQMQywEyBQgAEMsBMgUIABDLATIFCAAQywEyBQgAEMsBMgUIABDLATIFCAAQywEyBQgAEMsBMgUIABDLAToECAAQR1CN9gNYjfYDYOn8A2gAcAJ4AIABgQGIAYEBkgEDMC4xmAEAoAEBqgEHZ3dzLXdpesgBCMABAQ&sclient=psy-ab&ved=0ahUKEwjhvMCC_tXtAhVLxIsKHdN9DEsQ4dUDCAw&uact=5'
+		HRN_USD = 'https://www.google.com/search?client=opera-gx&sxsrf=ALeKk02mV6D-j7a_mb97Q9GyechURetOIg%3A1608241595077&ei=u9HbX8OJBIK73AOJyLvYBA&q=доллар+к+гривне&oq=доллар&gs_lcp=CgZwc3ktYWIQARgAMgkIIxAnEEYQggIyBAgjECcyCAgAEMkDEMsBMgUIABDLATIFCAAQywEyBQgAEMsBMgUIABDLATIFCAAQywEyBQgAEMsBMgUIABDLAToICAAQyQMQkQI6BQgAEJECOgIIADoICC4QxwEQowI6BQgAEMkDOgIILjoJCAAQyQMQChAqOgQIABAKOgcIIxDqAhAnOgYIIxAnEBM6CwguEMcBEKMCEMkDOgoIABDJAxAUEIcCUJrNLVii4i1g9OctaAVwAXgAgAGbAYgB9AiSAQM2LjWYAQCgAQGqAQdnd3Mtd2l6sAEKuAECwAEB&sclient=psy-ab'
 		headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36 OPR/71.0.3770.456'}
 		full_page = requests.get(HRN_USD, headers=headers)
 		soup = BeautifulSoup(full_page.content, 'html.parser')
