@@ -1,4 +1,4 @@
-git push heroku develop:master
+git push heroku master
 import telebot
 import random
 import requests
