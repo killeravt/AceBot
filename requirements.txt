@@ -2,4 +2,3 @@ pyowm
 requests
 bs4
 pyTelegramBotAPI
-random
