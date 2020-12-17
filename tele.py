@@ -7,7 +7,7 @@ from pyowm.utils.config import get_default_config
 from bs4 import BeautifulSoup
 config_dict = get_default_config()
 config_dict['language'] = 'ru'
-bot = telebot.TeleBot("1417359954:AAFP4u8nFHh3rYzY-76-SED2JgDA_Lewplo")
+bot = telebot.TeleBot("BOT_TOKEN")
 owm = OWM('c4153a7bc6d29047fcba68583813033b', config_dict)
 
 @bot.message_handler(commands=["start"])
