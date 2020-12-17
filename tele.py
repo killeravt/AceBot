@@ -1,4 +1,4 @@
-# - *- coding: utf- 8 - *-
+heroku create myapp --buildpack heroku/python
 import telebot
 import random
 import requests
