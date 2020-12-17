@@ -1,4 +1,3 @@
-git push heroku master
 import telebot
 import random
 import requests
