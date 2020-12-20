@@ -2,3 +2,6 @@ pyowm
 requests
 bs4
 pyTelegramBotAPI
+schedule
+threading
+multiprocessing
