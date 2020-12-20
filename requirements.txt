@@ -4,5 +4,4 @@ bs4
 pyTelegramBotAPI
 schedule
 threaded
-multiprocessing
-multiprocess
+
