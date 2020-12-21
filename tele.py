@@ -14,46 +14,74 @@ config_dict = get_default_config()
 config_dict['language'] = 'ru'
 bot = telebot.TeleBot("1407745525:AAFtQlzk9A99dKX0naKXPNynUAXozY2CrW0")
 owm = OWM('c4153a7bc6d29047fcba68583813033b', config_dict)
-jf = open(r"jf.txt", "r")
-ju = set()
-for line in jf:
-  ju.add(line.strip())
-  jf.close
+
+user1 = 437398899
+user2 = 949164017
+user3 = 0
+user4 = 0
+user5 = 0
+user6 = 0
+user7 = 0
+user8 = 0
+user9 = 0
+user10 = 0
+
+
 
 @bot.message_handler(commands=["start"])
 def start_message(message):
   user_markup = telebot.types.ReplyKeyboardMarkup(True, False)
   user_markup.row("Погода🌧️", "Курсы валют💸", "Орел/Решка🦅", "Корона👑", "Прогноз погоды⛅")
-  bot.send_message(message.chat.id, "Добрый день", reply_markup=user_markup)
+  bot.send_message(message.chat.id, "Привет, я - бот, который предоставляет информацию. После ввода комманды /start откроется клавиатура. Нажав на кнопку, ты или выполнишь комманду, или откроешь допольнительные кнопки, нажав на которые получишь информацию.")
+  bot.send_message(message.chat.id, "Также, мой автор предусмотрел авторассылку прогноза погоды рано утром на сегодняшний день. Если заинтересовало - пропиши /mail , и через некоторое время ты будешь получать рассылку с погодой ", reply_markup=user_markup)
 
 @bot.message_handler(commands=['mail'])
 def startJoin(message):
-  if not str(message.chat.id) in ju:
-    jf = open(r"jf.txt", "a")
-    jf.write(str(message.chat.id) + "\n")
-    ju.add(message.chat.id)
+  bot.send_message(user1, message.chat.id)
 
 @bot.message_handler(commands=['special'])
-def send_message1():
-  for user in ju:
-    URL = 'https://sinoptik.ua/погода-киев/10-дней'
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36 OPR/71.0.3770.456'}
-    full_page = requests.get(URL, headers=headers)
-    soup = BeautifulSoup(full_page.content, 'html.parser')
-    tmin = soup.findAll("div", {"class": "min"})
-    temp_min = tmin[0].text
-    orig1 = temp_min
-    tp_min = orig1.replace("мин. ", "")
-    tmax = soup.findAll("div", {"class": "max"})
-    temp_max = tmax[0].text
-    orig2 = temp_max
-    tp_max = orig2.replace("макс. ", "")
-    desc = soup.findAll("div", {"class": "description"})[1]
-    description = desc.text
-    bot.send_message(user, "Доброе утро! Сегодня в городе Киев минимальная температура составит " + tp_min + " , а минимальная " + tp_max)
-    bot.send_message(user, description)
+def send_message2(message):
+  URL = 'https://sinoptik.ua/погода-киев/10-дней'
+  headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36 OPR/71.0.3770.456'}
+  full_page = requests.get(URL, headers=headers)
+  soup = BeautifulSoup(full_page.content, 'html.parser')
+  tmin = soup.findAll("div", {"class": "min"})
+  temp_min = tmin[0].text
+  orig1 = temp_min
+  tp_min = orig1.replace("мин. ", "")
+  tmax = soup.findAll("div", {"class": "max"})
+  temp_max = tmax[0].text
+  orig2 = temp_max
+  tp_max = orig2.replace("макс. ", "")
+  desc = soup.findAll("div", {"class": "description"})[1]
+  description = desc.text
+  bot.send_message(user1, "Доброе утро!")
+  bot.send_message(user1,  description + "Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+  bot.send_message(user2, "Доброе утро!")
+  bot.send_message(user2,  description + "Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
 
-schedule.every().day.at("21:31").do(send_message1)                    #ВРЕМЯЯЯЯЯЯЯ
+
+def send_message1():
+  URL = 'https://sinoptik.ua/погода-киев/10-дней'
+  headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36 OPR/71.0.3770.456'}
+  full_page = requests.get(URL, headers=headers)
+  soup = BeautifulSoup(full_page.content, 'html.parser')
+  tmin = soup.findAll("div", {"class": "min"})
+  temp_min = tmin[0].text
+  orig1 = temp_min
+  tp_min = orig1.replace("мин. ", "")
+  tmax = soup.findAll("div", {"class": "max"})
+  temp_max = tmax[0].text
+  orig2 = temp_max
+  tp_max = orig2.replace("макс. ", "")
+  desc = soup.findAll("div", {"class": "description"})[1]
+  description = desc.text
+  bot.send_message(user1, "Доброе утро!")
+  bot.send_message(user1,  description + "Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+  bot.send_message(user2, "Доброе утро!")
+  bot.send_message(user2,  description + "Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+
+schedule.every().day.at("02:45").do(send_message1)                    #ВРЕМЯЯЯЯЯЯЯ
 
 class ScheduleMessage():
   def try_send_schedule():
