@@ -81,7 +81,7 @@ def send_message1():
   bot.send_message(user2, "Доброе утро!")
   bot.send_message(user2,  description + "Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
 
-schedule.every().day.at("02:45").do(send_message1)                    #ВРЕМЯЯЯЯЯЯЯ
+schedule.every().day.at("00:47").do(send_message1)                    #ВРЕМЯЯЯЯЯЯЯ
 
 class ScheduleMessage():
   def try_send_schedule():
