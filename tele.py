@@ -17,7 +17,7 @@ owm = OWM('c4153a7bc6d29047fcba68583813033b', config_dict)
 
 user1 = 437398899
 user2 = 949164017
-user3 = 0
+user3 = 464634386
 user4 = 0
 user5 = 0
 user6 = 0
@@ -87,7 +87,7 @@ def send_message1():
   else:
     bot.send_message(user1, "Доброе утро!" + description + " Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
     bot.send_message(user2, "Доброе утро!" + description + " Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
-#   bot.send_message(user3, "Доброе утро!" + description + " Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+    bot.send_message(user3, "Доброе утро!" + description + " Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
 
 schedule.every().day.at("05:00").do(send_message1)                    #ВРЕМЯЯЯЯЯЯЯ
 
