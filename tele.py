@@ -53,14 +53,16 @@ def send_message2(message):
   temp_max = tmax[0].text
   orig2 = temp_max
   tp_max = orig2.replace("макс. ", "")
-  desc = soup.findAll("div", {"class": "description"})[1]
+  desc = soup.findAll("div", {"class": "description"})[0]
   description = desc.text
-  bot.send_message(user1, "Доброе утро!")
-  bot.send_message(user1,  description + "Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
-  bot.send_message(user2, "Доброе утро!")
-  bot.send_message(user2,  description + "Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
-#  bot.send_message(user3, "Доброе утро!")
-#  bot.send_message(user3,  description + "Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+  if description == "ухудшение видимости до 500 м":
+    desc = soup.findAll("div", {"class": "description"})[1]
+    description = desc.text
+  else:
+    bot.send_message(user1, "Доброе утро!" + description + " Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+    bot.send_message(user2, "Доброе утро!" + description + " Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+#   bot.send_message(user3, "Доброе утро!" + description + " Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+
 
 
 
@@ -77,14 +79,15 @@ def send_message1():
   temp_max = tmax[0].text
   orig2 = temp_max
   tp_max = orig2.replace("макс. ", "")
-  desc = soup.findAll("div", {"class": "description"})[1]
+  desc = soup.findAll("div", {"class": "description"})[0]
   description = desc.text
-  bot.send_message(user1, "Доброе утро!")
-  bot.send_message(user1,  description + "Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
-  bot.send_message(user2, "Доброе утро!")
-  bot.send_message(user2,  description + "Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
-#  bot.send_message(user3, "Доброе утро!")
-#  bot.send_message(user3,  description + "Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+  if description == "ухудшение видимости до 500 м":
+    desc = soup.findAll("div", {"class": "description"})[1]
+    description = desc.text
+  else:
+    bot.send_message(user1, "Доброе утро!" + description + " Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+    bot.send_message(user2, "Доброе утро!" + description + " Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+#   bot.send_message(user3, "Доброе утро!" + description + " Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
 
 schedule.every().day.at("05:00").do(send_message1)                    #ВРЕМЯЯЯЯЯЯЯ
 
@@ -290,15 +293,15 @@ def inline(call):
     bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
   if call.data == 'all1':
     bot.answer_callback_query(callback_query_id=call.id, text='Получаем информацию... Пожалуйста, подождите.')
-    TWURL = "https://news.google.com/covid19/map?hl=en-US&mid=%2Fm%2F02h7_7&gl=US&ceid=US%3Aen"
+    TWURL = "https://www.google.com/search?client=opera-gx&sxsrf=ALeKk03wvz5xvCFcVgOzSW446wtqZW8r4g%3A1608601206348&ei=dk7hX_TSFOrLrgT2m6WACA&q=коронавирус+киев&oq=&gs_lcp=CgZwc3ktYWIQARgAMgcIIxDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnOgcIIxDJAxAnOgQIIxAnOgUIABDLAVDjUFjjUGDRW2gBcAB4AIABWogBWpIBATGYAQCgAQGqAQdnd3Mtd2l6sAEKwAEB&sclient=psy-ab"
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36 OPR/71.0.3770.456'}
     full_page = requests.get(TWURL, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
-    covid = soup.findAll("div", {"class": "UvMayb"})
+    covid = soup.findAll("div", {"jsname": "fUyIqc"})            #1111111111111111111
     info = covid[0].text
     original = info
-    removed = original.replace(",", "")
-    bot.send_message(call.message.chat.id, "За период 2020-го года в городе Киев было обнаружено " + removed + " случаев Covid 19")
+    removed = original.replace("тис.", "")
+    bot.send_message(call.message.chat.id, "За период 2020-го года в городе Киев было обнаружено " + removed + " тысяч случаев Covid 19")
     bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
   if call.data == 'today':
     try:
@@ -314,11 +317,18 @@ def inline(call):
       temp_max = tmax[0].text
       orig2 = temp_max
       tp_max = orig2.replace("макс. ", "")
-      desc = soup.findAll("div", {"class": "description"})[1]
+      desc = soup.findAll("div", {"class": "description"})[0]
       description = desc.text
-      bot.send_message(call.message.chat.id, "На сегодня минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
-      bot.send_message(call.message.chat.id, description)
-      bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
+      if description == "ухудшение видимости до 500 м":
+        desc = soup.findAll("div", {"class": "description"})[1]
+        description = desc.text
+        bot.send_message(call.message.chat.id, "На сегодня минимальная температура составит " + tp_min + " , а минимальная " + tp_max)
+        bot.send_message(call.message.chat.id, description)
+        bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
+      else:
+        bot.send_message(call.message.chat.id, "На сегодня минимальная температура составит " + tp_min + " , а минимальная " + tp_max)
+        bot.send_message(call.message.chat.id, description)
+        bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
     except:
       pass
   if call.data == 'tomorrow':
@@ -335,7 +345,7 @@ def inline(call):
       temp_max = tmax[1].text
       orig2 = temp_max
       tp_max = orig2.replace("макс. ", "")
-      bot.send_message(call.message.chat.id, "На завтра минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+      bot.send_message(call.message.chat.id, "На завтра минимальная температура составит " + tp_min + " , а минимальная " + tp_max)
       bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
     except:
       pass
