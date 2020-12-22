@@ -300,7 +300,7 @@ def inline(call):
     covid = soup.findAll("div", {"jsname": "fUyIqc"})            #1111111111111111111
     info = covid[0].text
     original = info
-    removed = original.replace("тис.", "")
+    removed = original.replace("K", "")
     bot.send_message(call.message.chat.id, "За период 2020-го года в городе Киев было обнаружено " + removed + " тысяч случаев Covid 19")
     bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
   if call.data == 'today':
