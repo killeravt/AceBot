@@ -322,11 +322,11 @@ def inline(call):
       if description == "ухудшение видимости до 500 м":
         desc = soup.findAll("div", {"class": "description"})[1]
         description = desc.text
-        bot.send_message(call.message.chat.id, "На сегодня минимальная температура составит " + tp_min + " , а минимальная " + tp_max)
+        bot.send_message(call.message.chat.id, "На сегодня минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
         bot.send_message(call.message.chat.id, description)
         bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
       else:
-        bot.send_message(call.message.chat.id, "На сегодня минимальная температура составит " + tp_min + " , а минимальная " + tp_max)
+        bot.send_message(call.message.chat.id, "На сегодня минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
         bot.send_message(call.message.chat.id, description)
         bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
     except:
@@ -345,7 +345,8 @@ def inline(call):
       temp_max = tmax[1].text
       orig2 = temp_max
       tp_max = orig2.replace("макс. ", "")
-      bot.send_message(call.message.chat.id, "На завтра минимальная температура составит " + tp_min + " , а минимальная " + tp_max)
+      bot.send_message(call.message.chat.id, "На завтра минимальная температура составит " + tp_min + " , а макси
+мальная " + tp_max)
       bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
     except:
       pass
