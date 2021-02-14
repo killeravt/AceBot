@@ -346,7 +346,6 @@ def inline(call):
       orig2 = temp_max
       tp_max = orig2.replace("макс. ", "")
       bot.send_message(call.message.chat.id, "На завтра минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
-      bot.send_message(call.message.chat.id, "На завтра минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
       bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
     except:
       pass
