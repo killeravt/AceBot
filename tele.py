@@ -60,7 +60,7 @@ def send_message2(message):
     description = desc.text
   else:
     bot.send_message(user1, "Доброе утро!" + description + " Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
-    bot.send_message(user2, "Доброе утро!" + description + " Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+#   bot.send_message(user2, "Доброе утро!" + description + " Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
 #   bot.send_message(user3, "Доброе утро!" + description + " Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
 
 
@@ -85,9 +85,9 @@ def send_message1():
     desc = soup.findAll("div", {"class": "description"})[1]
     description = desc.text
   else:
-    bot.send_message(user1, "Доброе утро! " + description + ". Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
-    bot.send_message(user2, "Доброе утро! " + description + ". Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
-    bot.send_message(user3, "Доброе утро! " + description + ". Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+    bot.send_message(user1, "Доброе утро! \n" + description + "\n Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+    bot.send_message(user2, "Доброе утро! \n" + description + "\n Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+    bot.send_message(user3, "Доброе утро! \n" + description + "\n Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
 
 schedule.every().day.at("05:00").do(send_message1)                    #ВРЕМЯЯЯЯЯЯЯ
 
