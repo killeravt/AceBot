@@ -55,11 +55,11 @@ def send_message2(message):
   tp_max = orig2.replace("макс. ", "")
   desc = soup.findAll("div", {"class": "description"})[0]
   description = desc.text
-  if description == "ухудшение видимости до 500 м":
-    desc = soup.findAll("div", {"class": "description"})[1]
-    description = desc.text
-  else:
-    bot.send_message(user1, "Доброе утро!" + description + " Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+  desc2 = soup.findAll("div", {"class": "description"})[1]
+  description2 = desc2.text
+  bot.send_message(user1, "Доброе утро!\nНа сегодня минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+  bot.send_message(user1, description)
+  bot.send_message(user1, description2)
 #   bot.send_message(user2, "Доброе утро!" + description + " Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
 #   bot.send_message(user3, "Доброе утро!" + description + " Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
 
@@ -81,13 +81,18 @@ def send_message1():
   tp_max = orig2.replace("макс. ", "")
   desc = soup.findAll("div", {"class": "description"})[0]
   description = desc.text
-  if description == "ухудшение видимости до 500 м":
-    desc = soup.findAll("div", {"class": "description"})[1]
-    description = desc.text
-  else:
-    bot.send_message(user1, "Доброе утро! \n" + description + "\n Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
-    bot.send_message(user2, "Доброе утро! \n" + description + "\n Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
-    bot.send_message(user3, "Доброе утро! \n" + description + "\n Минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+  desc2 = soup.findAll("div", {"class": "description"})[1]
+  description2 = desc2.text
+  bot.send_message(user1, "Доброе утро!\nНа сегодня минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+  bot.send_message(user1, description)
+  bot.send_message(user1, description2)
+  bot.send_message(user2, "Доброе утро!\nНа сегодня минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+  bot.send_message(user2, description)
+  bot.send_message(user2, description2)
+  bot.send_message(user3, "Доброе утро!\nНа сегодня минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+  bot.send_message(user3, description)
+  bot.send_message(user3, description2)
+
 
 schedule.every().day.at("05:00").do(send_message1)                    #ВРЕМЯЯЯЯЯЯЯ
 
@@ -304,33 +309,27 @@ def inline(call):
     bot.send_message(call.message.chat.id, "За период 2020-го года в городе Киев было обнаружено " + removed + " тысяч случаев Covid 19")
     bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
   if call.data == 'today':
-    try:
-      URL = 'https://sinoptik.ua/погода-киев/10-дней'
-      headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36 OPR/71.0.3770.456'}
-      full_page = requests.get(URL, headers=headers)
-      soup = BeautifulSoup(full_page.content, 'html.parser')
-      tmin = soup.findAll("div", {"class": "min"})
-      temp_min = tmin[0].text
-      orig1 = temp_min
-      tp_min = orig1.replace("мин. ", "")
-      tmax = soup.findAll("div", {"class": "max"})
-      temp_max = tmax[0].text
-      orig2 = temp_max
-      tp_max = orig2.replace("макс. ", "")
-      desc = soup.findAll("div", {"class": "description"})[0]
-      description = desc.text
-      if description == "ухудшение видимости до 500 м":
-        desc = soup.findAll("div", {"class": "description"})[1]
-        description = desc.text
-        bot.send_message(call.message.chat.id, "На сегодня минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
-        bot.send_message(call.message.chat.id, description)
-        bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
-      else:
-        bot.send_message(call.message.chat.id, "На сегодня минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
-        bot.send_message(call.message.chat.id, description)
-        bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
-    except:
-      pass
+    URL = 'https://sinoptik.ua/погода-киев/10-дней'
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36 OPR/71.0.3770.456'}
+    full_page = requests.get(URL, headers=headers)
+    soup = BeautifulSoup(full_page.content, 'html.parser')
+    tmin = soup.findAll("div", {"class": "min"})
+    temp_min = tmin[0].text
+    orig1 = temp_min
+    tp_min = orig1.replace("мин. ", "")
+    tmax = soup.findAll("div", {"class": "max"})
+    temp_max = tmax[0].text
+    orig2 = temp_max
+    tp_max = orig2.replace("макс. ", "")
+    desc = soup.findAll("div", {"class": "description"})[0]
+    description = desc.text
+    desc2 = soup.findAll("div", {"class": "description"})[1]
+    description2 = desc2.text
+    bot.send_message(call.message.chat.id, "На сегодня минимальная температура составит " + tp_min + " , а максимальная " + tp_max)
+    bot.send_message(call.message.chat.id, description)
+    bot.send_message(call.message.chat.id, description2)
+    bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
+
   if call.data == 'tomorrow':
     try:
       RURL = 'https://sinoptik.ua/погода-киев/10-дней'
